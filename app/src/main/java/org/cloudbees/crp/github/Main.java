@@ -23,9 +23,7 @@ public class Main extends GuiceServletContextListener {
                 new JerseyServletModule() {
                     @Override
                     protected void configureServlets() {
-                        bind(RestaurantResource.class);
-                        bind(UserResource.class);
-                        bind(ReviewResource.class);
+                        bind(GitHubAccount.class);
 
                         filter("/*").through(PersistFilter.class);
                         serve("/*").with(GuiceContainer.class, POJO_JSON_MAPPING);

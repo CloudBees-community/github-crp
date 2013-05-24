@@ -7,6 +7,8 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import java.util.List;
 
 /**
+ * Partial default implementation of {@link CloudResourceProvider}.
+ *
  * @author Kohsuke Kawaguchi
  */
 public abstract class CloudResourceProviderSupport extends CloudResourceSupport implements CloudResourceProvider {
