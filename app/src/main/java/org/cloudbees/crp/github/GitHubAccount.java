@@ -1,16 +1,22 @@
 package org.cloudbees.crp.github;
 
+import com.cloudbees.cloud_resource.types.CloudResourceError;
 import com.cloudbees.cloud_resource.types.CloudResourceTypes;
 import com.cloudbees.cloud_resource.types.ReferencedResource;
 import org.cloudbees.cloud_resource.jersey.CloudResourceProviderSupport;
+import org.cloudbees.cloud_resource.jersey.CloudResourceSupport;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GitHub;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.io.IOException;
 import java.net.URI;
@@ -33,6 +39,9 @@ public class GitHubAccount extends CloudResourceProviderSupport {
     @Context
     UriInfo uriInfo;
 
+    @Inject
+    EntityManager manager;
+
     @JsonProperty
     public List<ReferencedResource> edges() {
         List<ReferencedResource> rrl = new ArrayList<>();
@@ -52,7 +61,14 @@ public class GitHubAccount extends CloudResourceProviderSupport {
     }
 
     private GHUser connect() throws IOException {
-        return GitHub.connectAnonymously().getUser(login);
+        Credential cr = manager.find(Credential.class,new CredentialPK());
+        if (cr==null) {
+            CloudResourceError err = new CloudResourceError("Account %s does not have access to GitHub organization "+login,
+                    null, null/*TODO:URL*/);
+            throw new WebApplicationException(CloudResourceSupport.asResponse(err));
+        }
+
+        return GitHub.connect(cr.account.githubLogin,cr.token).getUser(login);
     }
 
     @Path("{repo}")

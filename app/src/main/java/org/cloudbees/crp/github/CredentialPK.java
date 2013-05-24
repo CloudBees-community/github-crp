@@ -16,6 +16,14 @@ public final class CredentialPK {
     @Column(nullable=false,updatable=false)
     public String githubLogin;
 
+    public CredentialPK() {
+    }
+
+    public CredentialPK(String cloudBeesAccount, String githubLogin) {
+        this.cloudBeesAccount = cloudBeesAccount;
+        this.githubLogin = githubLogin;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
