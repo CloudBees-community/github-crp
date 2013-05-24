@@ -1,10 +1,12 @@
 package org.cloudbees.cloud_resource.jersey;
 
 import com.cloudbees.cloud_resource.types.CloudResource;
+import com.cloudbees.cloud_resource.types.CloudResourceTypes;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 /**
  * A partial default implementation of Jersey {@link CloudResource}.
@@ -21,6 +23,10 @@ public abstract class CloudResourceSupport implements CloudResource {
     @GET
     @Produces(CloudResource.CONTENT_TYPE)
     public Response doIndex() {
-        return Response.ok(this).build();
+        ResponseBuilder rsp = Response.ok(this);
+        for (String t : CloudResourceTypes.of(this)) {
+            rsp.header("X-Cloud-Resource-Type",t);
+        }
+        return rsp.build();
     }
 }
