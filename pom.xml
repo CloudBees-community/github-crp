@@ -9,6 +9,5 @@
 
   <modules>
     <module>app</module>
-    <module>base</module>
   </modules>
 </project>
