@@ -34,7 +34,7 @@ public class GitHubAccount extends CloudResourceProviderSupport {
     UriInfo uriInfo;
 
     @JsonProperty
-    public List<ReferencedResource> edges() {
+    public List<ReferencedResource> resources() {
         List<ReferencedResource> rrl = new ArrayList<>();
 
         Set<String> types = CloudResourceTypes.of(GitRepositoryCloudResource.class);
