@@ -11,7 +11,7 @@
     <dependency>
       <groupId>org.kohsuke</groupId>
       <artifactId>github-api</artifactId>
-      <version>1.42</version>
+      <version>1.43-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -31,6 +31,13 @@
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>com.cloudbees</groupId>
         <artifactId>bees-maven-plugin</artifactId>
@@ -59,6 +66,11 @@
           <webApp>
             <contextPath>/</contextPath>
           </webApp>
+          <connectors>
+            <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+              <port>9090</port>
+            </connector>
+          </connectors>
           <contextXml>./jetty-develop.xml</contextXml>
 
           <!-- use the test classpath for loading resources, since this takes priority -->
