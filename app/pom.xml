@@ -18,7 +18,13 @@
       <artifactId>cloud-resource-commons-jaxrs-jpa</artifactId>
       <version>0.1-SNAPSHOT</version>
     </dependency>
+    <dependency>
+      <groupId>com.cloudbees</groupId>
+      <artifactId>cloudbees-api-client</artifactId>
+      <version>1.5.3-SNAPSHOT</version>
+    </dependency>
 
+    
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
