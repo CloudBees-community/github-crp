@@ -7,6 +7,14 @@
     <listener-class>org.cloudbees.crp.github.Main</listener-class>
   </listener>
 
+    <context-param>
+        <param-name>client_id</param-name>
+        <param-value>OAUTH_APP_CLIENT_ID</param-value>
+    </context-param>
+    <context-param>
+        <param-name>client_secret</param-name>
+        <param-value>OAUTH_APP_CLIENT_SECRET</param-value>
+    </context-param>
   <filter>
     <filter-name>guiceFilter</filter-name>
     <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>

@@ -10,6 +10,7 @@ import org.kohsuke.github.GHRepository;
  * // TODO: some caching
  *
  * @author Kohsuke Kawaguchi
+ * @author Vivek Pandey
  */
 public class GitHubRepository extends CloudResourceSupport implements GitRepositoryCloudResource {
     private final GHRepository repository;

@@ -3,13 +3,16 @@ package org.cloudbees.crp.github;
 import com.cloudbees.cloud_resource.types.CloudResourceTypes;
 import com.cloudbees.cloud_resource.types.ReferencedResource;
 import org.cloudbees.cloud_resource.jersey.CloudResourceProviderSupport;
+import org.cloudbees.cloud_resource.jersey.Secure;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GitHub;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import java.io.IOException;
@@ -24,8 +27,11 @@ import java.util.Set;
  * // TODO: some caching
  *
  * @author Kohsuke Kawaguchi
+ * @author Vivek Pandey
  */
 @Path("/{login}")
+@Consumes("application/vnd.cloudbees.resource+json")
+@Produces("application/vnd.cloudbees.resource+json")
 public class GitHubAccount extends CloudResourceProviderSupport {
     @PathParam("login")
     String login;
@@ -56,6 +62,7 @@ public class GitHubAccount extends CloudResourceProviderSupport {
     }
 
     @Path("{repo}")
+    @Secure(capabilities={"https://types.cloudbees.com/resource/read"})
     public GitHubRepository getRepository(@PathParam("repo") String repo) throws IOException {
         return new GitHubRepository(connect().getRepository(repo));
     }

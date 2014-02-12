@@ -11,7 +11,7 @@
     <Arg>jdbc/db</Arg>
     <Arg>
       <New class="org.apache.commons.dbcp.BasicDataSource">
-        <Set name="url">jdbc:h2:./work</Set>
+        <Set name="url">jdbc:h2:./app/target/work</Set>
       </New>
     </Arg>
   </New>
