@@ -11,7 +11,6 @@ import com.sun.jersey.api.core.ResourceConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.guice.JerseyServletModule;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
-import org.cloudbees.cloud_resource.jersey.guice.CloudResourceModule;
 import org.cloudbees.cloud_resource.jersey.guice.OauthConfig;
 
 import java.util.HashMap;
@@ -26,7 +25,6 @@ public class Main extends GuiceServletContextListener {
     protected Injector getInjector() {
         return Guice.createInjector(
                 new JpaPersistModule("github-crp"),
-                new CloudResourceModule(),
                 new CloudbeesAuthModule(),
                 new JerseyServletModule() {
                     @Override
