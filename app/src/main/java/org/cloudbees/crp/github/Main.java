@@ -18,6 +18,7 @@ import java.util.Map;
 
 /**
  * @author Kohsuke Kawaguchi
+ * @author Vivek Pandey
  */
 public class Main extends GuiceServletContextListener {
 
@@ -31,8 +32,11 @@ public class Main extends GuiceServletContextListener {
                     protected void configureServlets() {
                         bind(GitHubAccount.class);
 
+                        String clientId = getServletContext().getInitParameter("client_id");
+                        String clientSecret = getServletContext().getInitParameter("client_secret");
+
                         /** Allows injection of config object in to {@link CloudbeesAuthModule} module **/
-                        bind(OauthConfig.class).to(GithubOauthConfig.class);
+                        bind(OauthConfig.class).toInstance(new OauthConfig(clientId,clientSecret));
 
                         filter("/*").through(PersistFilter.class);
 
