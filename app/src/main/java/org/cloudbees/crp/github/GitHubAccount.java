@@ -1,9 +1,9 @@
 package org.cloudbees.crp.github;
 
+import com.cloudbees.cloud_resource.auth.Secure;
 import com.cloudbees.cloud_resource.types.CloudResourceTypes;
 import com.cloudbees.cloud_resource.types.ReferencedResource;
 import org.cloudbees.cloud_resource.jersey.CloudResourceProviderSupport;
-import org.cloudbees.cloud_resource.jersey.Secure;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHUser;
